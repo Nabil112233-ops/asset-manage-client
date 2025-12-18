@@ -5,6 +5,8 @@ import JoinAsManager from "../Pages/HR Manager/JoinAsManager";
 import JoinAsEmployee from "../Pages/Employee/JoinAsEmployee";
 import HrDashboardLayout from "../Layouts/HR Layouts/HrDashboardLayout";
 import AssetList from "../Features/HR Dashboard/Components/AssetList";
+import AddAsset from "../Features/HR Dashboard/Components/AddAsset";
+import AllRequest from "../Features/HR Dashboard/Components/AllRequest";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ export const router = createBrowserRouter([
         index: true,
         Component: AssetList
       },
+      {
+        path: 'add_asset',
+        Component: AddAsset
+      },
+      {
+        path: 'request',
+        Component: AllRequest
+      }
     ]
   }
 ]);
