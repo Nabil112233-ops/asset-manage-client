@@ -36,7 +36,7 @@ const Faq = () => {
                 {faqs.map((faq, i) => (
                     <div
                         key={i}
-                        className="bg-teal-800/70 backdrop-blur-md p-4 rounded-xl cursor-pointer transition hover:shadow-lg"
+                        className="bg-teal-800/90 backdrop-blur-md p-4 rounded-xl cursor-pointer transition hover:shadow-lg"
                         onClick={() => toggleFAQ(i)}
                     >
                         <div className="flex justify-between items-center">
@@ -44,7 +44,9 @@ const Faq = () => {
                             {openIndex === i ? <FaChevronUp className="text-teal-300" /> : <FaChevronDown className="text-teal-300" />}
                         </div>
                         {openIndex === i && (
-                            <p className="mt-2 text-gray-100 text-sm">{faq.answer}</p>
+                            <div className="bg-teal-800/70 p-4 border-t border-teal-700/50 rounded-md">
+                                <p className="mt-2 text-gray-100 text-sm">{faq.answer}</p>
+                            </div>
                         )}
                     </div>
                 ))}
