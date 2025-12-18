@@ -10,8 +10,8 @@ const EmployeeSidebar = () => {
     return (
         <aside className="w-64 bg-teal-900 min-h-screen p-4 hidden md:block">
             <nav className="space-y-2">
-                <NavLink to="/employee/assets" className={linkClass}>My Assets</NavLink>
-                <NavLink to="/employee/request" className={linkClass}>Request Asset</NavLink>
+                <NavLink to="." end className={linkClass}>My Assets</NavLink>
+                <NavLink to="employee_request" className={linkClass}>Request Asset</NavLink>
                 <NavLink to="/employee/team" className={linkClass}>My Team</NavLink>
                 <NavLink to="/employee/profile" className={linkClass}>Profile</NavLink>
             </nav>

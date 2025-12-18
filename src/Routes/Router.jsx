@@ -10,6 +10,7 @@ import AllRequest from "../Features/HR Dashboard/Components/AllRequest";
 import MyEmployee from "../Features/HR Dashboard/Components/MyEmployee";
 import UpgradePackage from "../Features/HR Dashboard/Components/UpgradePackage";
 import EmployeeDashboardLayout from "../Layouts/Employee Layouts/EmployeeDashboardLayout";
+import EmAsset from "../Features/Employee Dashboard/Components/EmAsset";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        path: EmAsset
       }
     ]
   }
