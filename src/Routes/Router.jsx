@@ -3,6 +3,7 @@ import RootLayout from "../Layouts/RootLayout";
 import Home from "../Pages/Home/Home/Home";
 import JoinAsManager from "../Pages/HR Manager/JoinAsManager";
 import JoinAsEmployee from "../Pages/Employee/JoinAsEmployee";
+import HrDashboardLayout from "../Layouts/HrDashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -23,4 +24,13 @@ export const router = createBrowserRouter([
         },
     ]
   },
+  {
+    path: "hr_dashboard",
+    Component: HrDashboardLayout,
+    children: [
+      {
+        
+      }
+    ]
+  }
 ]);

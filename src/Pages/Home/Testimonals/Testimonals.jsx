@@ -34,7 +34,7 @@ const Testimonals = () => {
                 {testimonials.map((t, i) => (
                     <motion.div
                         key={i}
-                        className="bg-teal-800/70 backdrop-blur-md p-6 rounded-2xl shadow hover:shadow-lg transition"
+                        className="bg-teal-800/80 backdrop-blur-md p-6 rounded-2xl shadow hover:shadow-lg transition"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
