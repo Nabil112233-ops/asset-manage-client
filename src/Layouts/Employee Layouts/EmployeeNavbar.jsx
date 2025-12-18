@@ -17,10 +17,10 @@ const EmployeeNavbar = () => {
                     tabIndex={0}
                     className="dropdown-content menu bg-teal-800 text-white rounded-box w-52 mt-3 p-2 shadow"
                 >
-                    <li><Link to="/employee/assets">My Assets</Link></li>
-                    <li><Link to="/employee/request">Request Asset</Link></li>
-                    <li><Link to="/employee/team">My Team</Link></li>
-                    <li><Link to="/employee/profile">Profile</Link></li>
+                    <li><Link to="." end>My Assets</Link></li>
+                    <li><Link to="employee_request">Request Asset</Link></li>
+                    <li><Link to="employee_team">My Team</Link></li>
+                    <li><Link to="employee_profile">Profile</Link></li>
                 </ul>
             </div>
 

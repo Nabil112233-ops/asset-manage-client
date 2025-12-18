@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import RootLayout from "../Layouts/RootLayout";
+import RootLayout from "../Layouts/RootLayout/RootLayout";
 import Home from "../Pages/Home/Home/Home";
 import JoinAsManager from "../Pages/HR Manager/JoinAsManager";
 import JoinAsEmployee from "../Pages/Employee/JoinAsEmployee";
@@ -11,6 +11,9 @@ import MyEmployee from "../Features/HR Dashboard/Components/MyEmployee";
 import UpgradePackage from "../Features/HR Dashboard/Components/UpgradePackage";
 import EmployeeDashboardLayout from "../Layouts/Employee Layouts/EmployeeDashboardLayout";
 import EmAsset from "../Features/Employee Dashboard/Components/EmAsset";
+import EmRequestAsset from "../Features/Employee Dashboard/Components/EmRequestAsset";
+import EmTeam from "../Features/Employee Dashboard/Components/EmTeam";
+import EmProfile from "../Features/Employee Dashboard/Components/EmProfile";
 
 export const router = createBrowserRouter([
   {
@@ -63,7 +66,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path: EmAsset
+        Component: EmAsset
+      },
+      {
+        path: 'employee_request',
+        Component: EmRequestAsset
+      },
+      {
+        path: 'employee_team',
+        Component: EmTeam
+      },
+      {
+        path: 'employee_profile',
+        Component: EmProfile
       }
     ]
   }

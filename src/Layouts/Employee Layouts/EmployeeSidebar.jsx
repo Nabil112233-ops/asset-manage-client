@@ -12,8 +12,8 @@ const EmployeeSidebar = () => {
             <nav className="space-y-2">
                 <NavLink to="." end className={linkClass}>My Assets</NavLink>
                 <NavLink to="employee_request" className={linkClass}>Request Asset</NavLink>
-                <NavLink to="/employee/team" className={linkClass}>My Team</NavLink>
-                <NavLink to="/employee/profile" className={linkClass}>Profile</NavLink>
+                <NavLink to="employee_team" className={linkClass}>My Team</NavLink>
+                <NavLink to="employee_profile" className={linkClass}>Profile</NavLink>
             </nav>
         </aside>
     );
