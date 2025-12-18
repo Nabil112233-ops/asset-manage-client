@@ -10,11 +10,11 @@ const HrSidebar = () => {
     return (
         <aside className="w-64 bg-teal-900 min-h-screen p-4 hidden md:block">
             <nav className="space-y-2">
-                <NavLink to="." className={linkClass}>Asset List</NavLink>
+                <NavLink to="." end className={linkClass}>Asset List</NavLink>
                 <NavLink to="add_asset" className={linkClass}>Add Asset</NavLink>
                 <NavLink to="request" className={linkClass}>All Requests</NavLink>
                 <NavLink to="my_employee" className={linkClass}>My Employee List</NavLink>
-                <NavLink to="/hr/upgrade" className={linkClass}>Upgrade Package</NavLink>
+                <NavLink to="upgrade_package" className={linkClass}>Upgrade Package</NavLink>
             </nav>
         </aside>
     );

@@ -7,24 +7,26 @@ import HrDashboardLayout from "../Layouts/HR Layouts/HrDashboardLayout";
 import AssetList from "../Features/HR Dashboard/Components/AssetList";
 import AddAsset from "../Features/HR Dashboard/Components/AddAsset";
 import AllRequest from "../Features/HR Dashboard/Components/AllRequest";
+import MyEmployee from "../Features/HR Dashboard/Components/MyEmployee";
+import UpgradePackage from "../Features/HR Dashboard/Components/UpgradePackage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
     children: [
-        {
-            index: true,
-            Component: Home,
-        },
-        {
-            path: 'join_as_manager',
-            Component: JoinAsManager
-        },
-        {
-            path: 'join_as_employee',
-            Component: JoinAsEmployee
-        },
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: 'join_as_manager',
+        Component: JoinAsManager
+      },
+      {
+        path: 'join_as_employee',
+        Component: JoinAsEmployee
+      },
     ]
   },
   {
@@ -42,6 +44,14 @@ export const router = createBrowserRouter([
       {
         path: 'request',
         Component: AllRequest
+      },
+      {
+        path: 'my_employee',
+        Component: MyEmployee
+      },
+      {
+        path: 'upgrade_package',
+        Component: UpgradePackage
       }
     ]
   }
