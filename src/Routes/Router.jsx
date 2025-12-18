@@ -3,7 +3,8 @@ import RootLayout from "../Layouts/RootLayout";
 import Home from "../Pages/Home/Home/Home";
 import JoinAsManager from "../Pages/HR Manager/JoinAsManager";
 import JoinAsEmployee from "../Pages/Employee/JoinAsEmployee";
-import HrDashboardLayout from "../Layouts/HrDashboardLayout";
+import HrDashboardLayout from "../Layouts/HR Layouts/HrDashboardLayout";
+import AssetList from "../Features/HR Dashboard/Components/AssetList";
 
 export const router = createBrowserRouter([
   {
@@ -29,8 +30,9 @@ export const router = createBrowserRouter([
     Component: HrDashboardLayout,
     children: [
       {
-        
-      }
+        index: true,
+        Component: AssetList
+      },
     ]
   }
 ]);
