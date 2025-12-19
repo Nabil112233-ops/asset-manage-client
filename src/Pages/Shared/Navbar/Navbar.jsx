@@ -65,9 +65,9 @@ const Navbar = () => {
             {/* RIGHT */}
             <div className="navbar-end">
                 {!user ? (
-                    <button className="btn btn-sm bg-teal-700 hover:bg-teal-600 border-none text-white">
+                    <Link to='login' className="btn btn-sm bg-teal-700 hover:bg-teal-600 border-none text-white">
                         Login
-                    </button>
+                    </Link>
                 ) : (
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

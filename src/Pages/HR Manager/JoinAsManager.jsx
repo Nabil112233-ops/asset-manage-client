@@ -1,25 +1,53 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
+import useAuth from '../../Hooks/useAuth';
 
 const JoinAsManager = () => {
+
+    const navigate = useNavigate();
+    const { createUser } = useAuth()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
-    const onSubmit = (data) => {
-        // Add auto-assigned fields
-        const payload = {
-            ...data,
-            role: "hr",
-            packageLimit: 5,
-            currentEmployees: 0,
-            subscription: "basic",
-        };
-        console.log("HR Registration Payload:", payload);
-        // TODO: send to backend API
-    };
+    const onSubmit = async (data) => {
+        try {
+            //  Firebase Signup
+            await createUser(data.email, data.password);
+
+            //  Backend payload
+            const payload = {
+                name: data.name,
+                email: data.email,
+                role: "hr",
+                companyName: data.companyName,
+                companyLogo: data.companyLogo,
+                packageLimit: 5,
+                currentEmployees: 0,
+                subscription: "basic",
+                dateOfBirth: data.dateOfBirth,
+                createdAt: new Date(),
+            };
+
+            //  Save to DB
+            await axios.post("http://localhost:5000/users/hr", payload);
+
+            //  SUCCESS TOAST
+            toast.success("HR account created successfully 🎉");
+
+            navigate("/dashboard/hr");
+
+        } catch (error) {
+            console.error(error);
+
+            // ERROR TOAST
+            toast.error(error.message || "Registration failed");
+        }
+    };;
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-teal-950 px-4">
