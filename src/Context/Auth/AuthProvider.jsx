@@ -43,16 +43,20 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
-            setLoading(false);
+
             if (currentUser?.email) {
-                const { data } = await axios.post(
-                    "http://localhost:5000/jwt",
-                    { email: currentUser.email }
-                );
-                localStorage.setItem("access-token", data.token);
+                try {
+                    const { data } = await axios.post('http://localhost:5000/jwt', { email: currentUser.email });
+                    if (data.token) {
+                        localStorage.setItem('access-token', data.token);
+                    }
+                } catch (err) {
+                    console.error("JWT Error:", err);
+                }
             } else {
-                localStorage.removeItem("access-token");
+                localStorage.removeItem('access-token');
             }
+            setLoading(false);
         });
         return () => unsubscribe();
     }, []);

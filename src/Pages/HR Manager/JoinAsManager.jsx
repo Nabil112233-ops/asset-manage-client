@@ -5,27 +5,30 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import useAuth from '../../Hooks/useAuth';
+import { uploadImage } from '../../Hooks/uploadImage';
 
 const JoinAsManager = () => {
 
     const navigate = useNavigate();
-    const { createUser } = useAuth()
+    const { createUser, updateUserProfile } = useAuth()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = async (data) => {
         try {
+            const imageFile = data.companyLogo[0];
+            const logoURL = await uploadImage(imageFile);
             //  Firebase Signup
             await createUser(data.email, data.password);
-
+            await updateUserProfile(data.name, logoURL)
             //  Backend payload
             const payload = {
                 name: data.name,
                 email: data.email,
                 role: "hr",
                 companyName: data.companyName,
-                companyLogo: data.companyLogo,
+                companyLogo: logoURL,
                 packageLimit: 5,
                 currentEmployees: 0,
                 subscription: "basic",
@@ -88,10 +91,10 @@ const JoinAsManager = () => {
                     <div>
                         <label className="block text-gray-200 text-sm mb-1">Company Logo URL *</label>
                         <input
-                            type="text"
+                            type="file"
+                            accept="image/*"
                             {...register("companyLogo", { required: "Company Logo URL is required" })}
                             className="w-full p-3 rounded-lg bg-teal-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
-                            placeholder="https://example.com/logo.png"
                         />
                         {errors.companyLogo && <p className="text-red-400 text-xs mt-1">{errors.companyLogo.message}</p>}
                     </div>

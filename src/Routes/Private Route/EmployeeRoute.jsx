@@ -1,7 +1,7 @@
 import React from 'react';
 import useAuth from '../../Hooks/useAuth';
 import useRole from '../../Hooks/useRole';
-import { useLocation } from 'react-router';
+import { Navigate, useLocation } from 'react-router';
 
 const EmployeeRoute = ({ children }) => {
     const { user, loading } = useAuth();

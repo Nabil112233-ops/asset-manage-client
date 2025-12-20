@@ -11,7 +11,7 @@ const ManagerRoute = ({ children }) => {
         return <div className="flex justify-center items-center h-screen"><span className="loading loading-spinner loading-lg"></span></div>;
     }
 
-    if (user && role === 'manager') {
+    if (user && role === 'hr') {
         return children;
     }
 

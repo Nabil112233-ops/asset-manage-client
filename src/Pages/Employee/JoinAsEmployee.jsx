@@ -1,20 +1,45 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import useAuth from '../../Hooks/useAuth';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { uploadImage } from '../../Hooks/uploadImage';
 
 const JoinAsEmployee = () => {
+    const navigate = useNavigate()
+    const { createUser, updateUserProfile } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
 
-    const onSubmit = (data) => {
-        const payload = {
-            ...data,
-            role: "employee",
-        };
+    const onSubmit = async (data) => {
+        try {
 
-        console.log("Employee Registration:", payload);
-        // TODO: API call here
+            const imageFile = data.profileImage[0];
+            toast.loading("Uploading profile image...");
+            const photoURL = await uploadImage(imageFile);
+            toast.dismiss();
+
+            await createUser(data.email, data.password);
+            await updateUserProfile(data.name, photoURL)
+            const payload = {
+                name: data.name,
+                email: data.email,
+                role: "employee",
+                photo: photoURL,
+                dateOfBirth: data.dateOfBirth,
+                createdAt: new Date(),
+            };
+
+            await axios.post("http://localhost:5000/users/employee", payload);
+
+            toast.success("Employee account created successfully 🎉");
+
+            navigate("/dashboard/employee");
+        } catch (error) {
+            toast.error(error.message || "Registration failed");
+        }
     };
     return (
         <div className="min-h-screen flex items-center justify-center bg-teal-950 px-4">
@@ -59,6 +84,18 @@ const JoinAsEmployee = () => {
                         {errors.email && (
                             <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>
                         )}
+                    </div>
+
+                    {/* Image */}
+                    <div>
+                        <label className="block text-gray-200 text-sm mb-1">Profile Image *</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            {...register("profileImage", { required: "Profile Image is required" })}
+                            className="file-input file-input-bordered file-input-accent w-full bg-teal-800 text-white"
+                        />
+                        {errors.profileImage && <p className="text-red-400 text-xs mt-1">{errors.profileImage.message}</p>}
                     </div>
 
                     {/* Password */}

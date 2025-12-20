@@ -21,71 +21,71 @@ import EmployeeRoute from "./Private Route/EmployeeRoute";
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: RootLayout,
+    element: <RootLayout></RootLayout>,
     children: [
       {
         index: true,
-        Component: Home,
+        element: <Home></Home>,
       },
       {
         path: 'login',
-        Component: Login
+        element: <Login></Login>
       },
       {
         path: 'join_as_manager',
-        Component: JoinAsManager
+        element: <JoinAsManager></JoinAsManager>
       },
       {
         path: 'join_as_employee',
-        Component: JoinAsEmployee
+        element: <JoinAsEmployee></JoinAsEmployee>
       }
     ]
   },
   {
-    path: "hr_dashboard",
+    path: "/dashboard/hr",
     element: <ManagerRoute><HrDashboardLayout></HrDashboardLayout></ManagerRoute>,
     children: [
       {
         index: true,
-        Component: AssetList
+        element: <AssetList></AssetList>
       },
       {
         path: 'add_asset',
-        Component: AddAsset
+        element: <AddAsset></AddAsset>
       },
       {
         path: 'request',
-        Component: AllRequest
+        element: <AllRequest></AllRequest>
       },
       {
         path: 'my_employee',
-        Component: MyEmployee
+        element: <MyEmployee></MyEmployee>
       },
       {
         path: 'upgrade_package',
-        Component: UpgradePackage
+        element: <UpgradePackage></UpgradePackage>
       }
     ]
   },
   {
-    path: 'employee_dashboard',
+    path: '/dashboard/employee',
     element: <EmployeeRoute><EmployeeDashboardLayout></EmployeeDashboardLayout></EmployeeRoute>,
     children: [
       {
         index: true,
-        Component: EmAsset
+        element: <EmAsset></EmAsset>
       },
       {
         path: 'employee_request',
-        Component: EmRequestAsset
+        element: <EmRequestAsset></EmRequestAsset>
       },
       {
         path: 'employee_team',
-        Component: EmTeam
+        element: <EmTeam></EmTeam>
       },
       {
         path: 'employee_profile',
-        Component: EmProfile
+        element: <EmProfile></EmProfile>
       }
     ]
   }

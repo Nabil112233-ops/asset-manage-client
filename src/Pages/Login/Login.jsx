@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from 'react-router';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import useAuth from '../../Hooks/useAuth';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Login = () => {
 
-    const { login } = useAuth()
+    const { logInUser } = useAuth()
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [authError, setAuthError] = useState("");
@@ -22,12 +24,36 @@ const Login = () => {
         setAuthError("");
 
         try {
-            const result = await login(data.email, data.password);
-            console.log("Logged in user:", result.user);
+            // Firebase login
+            const result = await logInUser(data.email, data.password);
+            const email = result.user.email;
 
-            // 🔜 later: fetch role & redirect based on role
-            navigate("/dashboard");
+            // Get JWT
+            const jwtRes = await axios.post("http://localhost:5000/jwt", { email });
+            localStorage.setItem("access-token", jwtRes.data.token);
+
+            // Get user role
+            const roleRes = await axios.get(
+                `http://localhost:5000/users/role/${email}`,
+                {
+                    headers: {
+                        authorization: `Bearer ${jwtRes.data.token}`,
+                    },
+                }
+            );
+
+            toast.success("Login successful 🚀");
+
+            // Role based redirect
+            if (roleRes.data.role === "hr") {
+                navigate("/dashboard/hr");
+            } else {
+                navigate("/dashboard/employee");
+            }
+
         } catch (error) {
+            console.error(error);
+            toast.error("Invalid email or password");
             setAuthError("Invalid email or password");
         }
     };
