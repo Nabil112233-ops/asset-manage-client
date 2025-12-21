@@ -15,6 +15,7 @@ const HrSidebar = () => {
                 <NavLink to="request" className={linkClass}>All Requests</NavLink>
                 <NavLink to="my_employee" className={linkClass}>My Employee List</NavLink>
                 <NavLink to="upgrade_package" className={linkClass}>Upgrade Package</NavLink>
+                <NavLink to="profile" className={linkClass}>Profile</NavLink>
             </nav>
         </aside>
     );

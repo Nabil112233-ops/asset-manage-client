@@ -17,6 +17,7 @@ import EmProfile from "../Features/Employee Dashboard/EmProfile";
 import Login from "../Pages/Login/Login";
 import ManagerRoute from "./Private Route/ManagerRoute";
 import EmployeeRoute from "./Private Route/EmployeeRoute";
+import HrProfile from "../Features/HR Dashboard/HrProfile";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: 'upgrade_package',
         element: <UpgradePackage></UpgradePackage>
+      },
+      {
+        path: 'profile',
+        element: <HrProfile></HrProfile>
       }
     ]
   },

@@ -3,6 +3,7 @@ import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../../Firebase/firebase.init';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
 const AuthProvider = ({ children }) => {
 
@@ -38,6 +39,17 @@ const AuthProvider = ({ children }) => {
         });
     };
 
+    const { data: userData, refetch: profileRefetch, isLoading: profileLoading } = useQuery({
+        queryKey: ['user-profile', user?.email],
+        enabled: !!user?.email && !loading,
+        queryFn: async () => {
+            const res = await axios.get(`http://localhost:5000/user-profile/${user?.email}`, {
+                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
+            });
+            return res.data;
+        }
+    });
+
     // State ovserver
 
     useEffect(() => {
@@ -63,12 +75,13 @@ const AuthProvider = ({ children }) => {
 
 
     const authInfo = {
-        user,
-        loading,
+        user: userData? { ...user, ...userData } : user,
+        loading: loading || profileLoading,
         createUser,
         logInUser,
         logOut,
-        updateUserProfile
+        updateUserProfile,
+        profileRefetch,
     }
 
     return (

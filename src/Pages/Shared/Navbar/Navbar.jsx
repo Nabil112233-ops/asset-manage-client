@@ -73,7 +73,7 @@ const Navbar = () => {
 
             {/* RIGHT */}
             <div className="navbar-end">
-                {!user ? (
+                {!user?.email ? (
                     <Link to='login' className="btn btn-sm bg-teal-700 hover:bg-teal-600 border-none text-white">
                         Login
                     </Link>
@@ -81,7 +81,7 @@ const Navbar = () => {
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full ring ring-teal-500 ring-offset-2">
-                                <img src={user?.photoURL || "https://i.ibb.co/2kR5k0M/user.png"} alt="profile" />
+                                <img src={user?.photoURL} alt="profile" />
                             </div>
                         </label>
 
