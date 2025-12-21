@@ -9,7 +9,7 @@ const EmTeam = () => {
     const { data: teamData = {}, isLoading } = useQuery({
         queryKey: ['my-team', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/my-team/${user?.email}`, {
+            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/my-team/${user?.email}`, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
             return res.data;

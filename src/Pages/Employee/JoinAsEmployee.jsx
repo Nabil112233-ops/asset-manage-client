@@ -32,7 +32,7 @@ const JoinAsEmployee = () => {
                 createdAt: new Date(),
             };
 
-            await axios.post("http://localhost:5000/users/employee", payload);
+            await axios.post("https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/users/employee", payload);
 
             toast.success("Employee account created successfully 🎉");
 

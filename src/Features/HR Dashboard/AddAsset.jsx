@@ -30,7 +30,7 @@ const AddAsset = () => {
                     createdAt: new Date().toISOString()
                 };
                 // data send to backend
-                const response = await axios.post('http://localhost:5000/assets', finalData, {
+                const response = await axios.post('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/assets', finalData, {
                     headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
                 });
                 console.log("Final Asset Data:", finalData);

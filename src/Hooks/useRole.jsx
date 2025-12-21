@@ -9,7 +9,7 @@ const useRole = () => {
         queryKey: [user?.email, 'role'],
         enabled: !loading && !!user?.email,
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/users/role/${user?.email}`, {
+            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/users/role/${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }

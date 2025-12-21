@@ -30,7 +30,7 @@ const HrProfile = () => {
                 companyLogo: logoURL
             };
 
-            const res = await axios.patch(`http://localhost:5000/update-hr-profile/${user?.email}`, updateInfo, {
+            const res = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/update-hr-profile/${user?.email}`, updateInfo, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
 

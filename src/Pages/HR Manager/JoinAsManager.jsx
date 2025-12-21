@@ -37,7 +37,7 @@ const JoinAsManager = () => {
             };
 
             //  Save to DB
-            await axios.post("http://localhost:5000/users/hr", payload);
+            await axios.post("https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/users/hr", payload);
 
             //  SUCCESS TOAST
             toast.success("HR account created successfully 🎉");

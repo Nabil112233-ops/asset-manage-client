@@ -12,7 +12,7 @@ const EmRequestAsset = () => {
     const { data: assets = [] } = useQuery({
         queryKey: ['available-assets'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/all-available-assets', {
+            const res = await axios.get('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/all-available-assets', {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }
@@ -35,7 +35,7 @@ const EmRequestAsset = () => {
             note: note
         };
 
-        const res = await axios.post('http://localhost:5000/asset-requests', requestData, {
+        const res = await axios.post('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/asset-requests', requestData, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('access-token')}`
             }

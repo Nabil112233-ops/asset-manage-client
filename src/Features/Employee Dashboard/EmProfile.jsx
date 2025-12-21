@@ -30,7 +30,7 @@ const EmProfile = () => {
                 photo: photoURL
             };
 
-            const dbRes = await axios.patch(`http://localhost:5000/update-profile/${user?.email}`, updateInfo, {
+            const dbRes = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/update-profile/${user?.email}`, updateInfo, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
 

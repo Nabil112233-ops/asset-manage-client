@@ -10,7 +10,7 @@ const MyEmployee = () => {
     const { data: employees = [], refetch } = useQuery({
         queryKey: ['my-employees', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/my-employees/${user?.email}`, {
+            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/my-employees/${user?.email}`, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
             return res.data;
@@ -19,7 +19,7 @@ const MyEmployee = () => {
 
     const handleRemove = async (id) => {
         if (window.confirm("Are you sure you want to remove this employee from your company?")) {
-            const res = await axios.delete(`http://localhost:5000/remove-employee/${id}?hrEmail=${user?.email}`, {
+            const res = await axios.delete(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/remove-employee/${id}?hrEmail=${user?.email}`, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
             if (res.data.success) {

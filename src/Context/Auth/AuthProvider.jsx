@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
         queryKey: ['user-profile', user?.email],
         enabled: !!user?.email && !loading,
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/user-profile/${user?.email}`, {
+            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/user-profile/${user?.email}`, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
             return res.data;
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
 
             if (currentUser?.email) {
                 try {
-                    const { data } = await axios.post('http://localhost:5000/jwt', { email: currentUser.email });
+                    const { data } = await axios.post('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/jwt', { email: currentUser.email });
                     if (data.token) {
                         localStorage.setItem('access-token', data.token);
                     }

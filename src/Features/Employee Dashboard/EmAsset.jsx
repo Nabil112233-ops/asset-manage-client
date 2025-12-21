@@ -12,7 +12,7 @@ const EmAsset = () => {
     const { data: myAssets = [], refetch } = useQuery({
         queryKey: ['my-assets', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/my-assets/${user?.email}`, {
+            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/my-assets/${user?.email}`, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
             return res.data;
@@ -23,7 +23,7 @@ const EmAsset = () => {
         if (!window.confirm("Are you sure you want to return this asset?")) return;
 
         try {
-            const res = await axios.patch(`http://localhost:5000/return-asset/${id}`, { assetId }, {
+            const res = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/return-asset/${id}`, { assetId }, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
             if (res.data.success) {

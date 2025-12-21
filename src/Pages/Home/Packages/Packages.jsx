@@ -6,7 +6,7 @@ const Packages = () => {
     const [packages, setPackages] = useState([])
     useEffect(() => {
         // Fetch from backend
-        axios.get("http://localhost:5000/packages")
+        axios.get("https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/packages")
             .then(res => setPackages(res.data))
     }, []);
     return (

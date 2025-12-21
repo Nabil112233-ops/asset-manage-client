@@ -16,7 +16,7 @@ const AssetList = () => {
     const { register, handleSubmit, reset } = useForm();
 
     const axiosSecure = axios.create({
-        baseURL: 'http://localhost:5000',
+        baseURL: 'https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app',
         headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
     });
 

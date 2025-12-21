@@ -10,7 +10,7 @@ const AllRequest = () => {
     const { data: requests = [], refetch } = useQuery({
         queryKey: ['hr-requests', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/hr-requests/${user?.email}`, {
+            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/hr-requests/${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }
@@ -20,7 +20,7 @@ const AllRequest = () => {
     });
 
     const handleApprove = async (request) => {
-        const res = await axios.patch(`http://localhost:5000/approve-request/${request._id}`, {
+        const res = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/approve-request/${request._id}`, {
             assetId: request.assetId,
             employeeEmail: request.requesterEmail,
             hrEmail: user?.email,
@@ -41,7 +41,7 @@ const AllRequest = () => {
 
     const handleReject = async (id) => {
         if (window.confirm("Are you sure you want to reject this request?")) {
-            const res = await axios.patch(`http://localhost:5000/reject-request/${id}`, {}, {
+            const res = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/reject-request/${id}`, {}, {
                 headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
             if (res.data.modifiedCount > 0) {

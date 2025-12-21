@@ -29,12 +29,12 @@ const Login = () => {
             const email = result.user.email;
 
             // Get JWT
-            const jwtRes = await axios.post("http://localhost:5000/jwt", { email });
+            const jwtRes = await axios.post("https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/jwt", { email });
             localStorage.setItem("access-token", jwtRes.data.token);
 
             // Get user role
             const roleRes = await axios.get(
-                `http://localhost:5000/users/role/${email}`,
+                `https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/users/role/${email}`,
                 {
                     headers: {
                         authorization: `Bearer ${jwtRes.data.token}`,
