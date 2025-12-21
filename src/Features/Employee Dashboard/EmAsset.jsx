@@ -14,7 +14,7 @@ const EmAsset = () => {
     const { data: myAssets = [], refetch } = useQuery({
         queryKey: ['my-assets', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/my-assets/${user?.email}`);
+            const res = await axiosSecure.get(`/assets/${user?.email}`);
             return res.data;
         }
     });

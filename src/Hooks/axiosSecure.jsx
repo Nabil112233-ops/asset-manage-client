@@ -10,20 +10,21 @@ const useAxiosSecure = () => {
     const navigate = useNavigate();
     const { logOut } = useAuth();
 
-    axiosSecure.interceptors.request.use(function (config) {
+    // Request Interceptor
+    axiosSecure.interceptors.request.use((config) => {
         const token = localStorage.getItem('access-token');
         if (token) {
             config.headers.authorization = `Bearer ${token}`;
         }
         return config;
-    }, function (error) {
-        return Promise.reject(error);
-    });
+    }, (error) => Promise.reject(error));
 
-    axiosSecure.interceptors.response.use(function (response) {
-        return response;
-    }, async (error) => {
+    // Response Interceptor
+    axiosSecure.interceptors.response.use((response) => response, 
+    async (error) => {
         const status = error.response?.status;
+        console.error('API Error:', status, error.config?.url);
+
         if (status === 401 || status === 403) {
             await logOut();
             navigate('/login');

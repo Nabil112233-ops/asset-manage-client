@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
         queryKey: ['user-profile', user?.email],
         enabled: !!user?.email && !loading,
         queryFn: async () => {
-            const res = await axios.get(`https://asset-manage-server-blue.vercel.app/user-profile/${user?.email}`);
+            const res = await useAxiosSecure.get(`/user-profile/${user?.email}`);
             return res.data;
         }
     });
