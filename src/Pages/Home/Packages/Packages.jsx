@@ -7,7 +7,12 @@ const Packages = () => {
     useEffect(() => {
         // Fetch from backend
         axios.get("https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/packages")
-            .then(res => setPackages(res.data))
+            .then(res => {
+                setPackages(res.data);
+            })
+            .catch(err => {
+                console.error("Error fetching packages:", err);
+            });
     }, []);
     return (
         <section className="py-20 px-6 max-w-7xl mx-auto">
