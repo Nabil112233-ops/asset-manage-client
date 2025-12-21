@@ -4,6 +4,7 @@ import axios from "axios";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import useAxiosSecure from "../../Hooks/axiosSecure";
 
 const CheckoutForm = ({ price, newLimit }) => {
     const stripe = useStripe();
@@ -12,12 +13,11 @@ const CheckoutForm = ({ price, newLimit }) => {
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure()
 
     useEffect(() => {
         if (price > 0) {
-            axios.post('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/create-payment-intent', { price }, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            })
+            axiosSecure.post('/create-payment-intent', { price })
                 .then(res => {
                     setClientSecret(res.data.clientSecret);
                 });
@@ -52,11 +52,9 @@ const CheckoutForm = ({ price, newLimit }) => {
             toast.error(confirmError.message);
             setProcessing(false);
         } else if (paymentIntent.status === 'succeeded') {
-            const res = await axios.patch('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/update-package-after-payment', {
+            const res = await axiosSecure.patch('/update-package-after-payment', {
                 email: user.email,
                 newLimit: newLimit
-            }, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
             });
 
             if (res.data.modifiedCount > 0) {

@@ -3,8 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useAuth from '../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const EmAsset = () => {
+    const axiosSecure = useAxiosSecure()
     const { user } = useAuth();
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('All');
@@ -12,9 +14,7 @@ const EmAsset = () => {
     const { data: myAssets = [], refetch } = useQuery({
         queryKey: ['my-assets', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/my-assets/${user?.email}`, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const res = await axiosSecure.get(`/my-assets/${user?.email}`);
             return res.data;
         }
     });
@@ -23,9 +23,7 @@ const EmAsset = () => {
         if (!window.confirm("Are you sure you want to return this asset?")) return;
 
         try {
-            const res = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/return-asset/${id}`, { assetId }, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const res = await axiosSecure.patch(`/return-asset/${id}`, { assetId })
             if (res.data.success) {
                 toast.success("Asset returned successfully!");
                 refetch();

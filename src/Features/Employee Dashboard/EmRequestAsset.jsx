@@ -3,8 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useAuth from '../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const EmRequestAsset = () => {
+    const axiosSecure = useAxiosSecure()
     const { user } = useAuth();
     const [selectedAsset, setSelectedAsset] = useState(null);
     const [note, setNote] = useState('');
@@ -12,11 +14,7 @@ const EmRequestAsset = () => {
     const { data: assets = [] } = useQuery({
         queryKey: ['available-assets'],
         queryFn: async () => {
-            const res = await axios.get('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/all-available-assets', {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('access-token')}`
-                }
-            });
+            const res = await axiosSecure.get('/all-available-assets');
             return res.data;
         }
     });
@@ -35,11 +33,7 @@ const EmRequestAsset = () => {
             note: note
         };
 
-        const res = await axios.post('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/asset-requests', requestData, {
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('access-token')}`
-            }
-        });
+        const res = await axiosSecure.post('/asset-requests', requestData);
         if (res.data.insertedId) {
             toast.success("Request sent successfully!");
             setSelectedAsset(null);

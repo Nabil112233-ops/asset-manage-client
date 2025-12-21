@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import useAuth from '../../Hooks/useAuth';
 import { uploadImage } from '../../Hooks/uploadImage';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const JoinAsManager = () => {
 
@@ -37,7 +38,7 @@ const JoinAsManager = () => {
             };
 
             //  Save to DB
-            await axios.post("https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/users/hr", payload);
+            await axios.post("https://asset-manage-server-blue.vercel.app/users/hr", payload);
 
             //  SUCCESS TOAST
             toast.success("HR account created successfully 🎉");

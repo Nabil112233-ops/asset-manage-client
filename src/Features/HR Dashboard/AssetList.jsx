@@ -8,17 +8,14 @@ import {
     PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend,
     BarChart, Bar, XAxis, YAxis, CartesianGrid
 } from 'recharts';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const AssetList = () => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure()
     const [search, setSearch] = useState('');
     const [editingAsset, setEditingAsset] = useState(null);
     const { register, handleSubmit, reset } = useForm();
-
-    const axiosSecure = axios.create({
-        baseURL: 'https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app',
-        headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-    });
 
     // Data fetching
     const { data: assets = [], isLoading, refetch } = useQuery({

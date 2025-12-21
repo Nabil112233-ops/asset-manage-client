@@ -4,10 +4,12 @@ import { uploadImage } from '../../Hooks/uploadImage';
 import useAuth from '../../Hooks/useAuth';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const AddAsset = () => {
     const [loading, setLoading] = useState(false);
     const { user } = useAuth()
+    const axiosSecure = useAxiosSecure()
     console.log(user)
     // React Hook Form initialization
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -30,9 +32,7 @@ const AddAsset = () => {
                     createdAt: new Date().toISOString()
                 };
                 // data send to backend
-                const response = await axios.post('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/assets', finalData, {
-                    headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-                });
+                const response = await axiosSecure.post('/assets', finalData);
                 console.log("Final Asset Data:", finalData);
                 if (response.data.insertedId) {
                     toast.success("Asset Added Successfully!");

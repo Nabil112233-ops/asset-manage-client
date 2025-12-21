@@ -4,8 +4,10 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { auth } from '../../Firebase/firebase.init';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const AuthProvider = ({ children }) => {
+    
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -43,9 +45,7 @@ const AuthProvider = ({ children }) => {
         queryKey: ['user-profile', user?.email],
         enabled: !!user?.email && !loading,
         queryFn: async () => {
-            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/user-profile/${user?.email}`, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const res = await axios.get(`https://asset-manage-server-blue.vercel.app/user-profile/${user?.email}`);
             return res.data;
         }
     });
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
 
             if (currentUser?.email) {
                 try {
-                    const { data } = await axios.post('https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/jwt', { email: currentUser.email });
+                    const { data } = await axios.post('https://asset-manage-server-blue.vercel.app/jwt', { email: currentUser.email });
                     if (data.token) {
                         localStorage.setItem('access-token', data.token);
                     }

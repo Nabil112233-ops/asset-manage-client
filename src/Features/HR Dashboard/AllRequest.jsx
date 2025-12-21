@@ -3,32 +3,26 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useAuth from '../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const AllRequest = () => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure()
 
     const { data: requests = [], refetch } = useQuery({
         queryKey: ['hr-requests', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/hr-requests/${user?.email}`, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('access-token')}`
-                }
-            });
+            const res = await axiosSecure.get(`/hr-requests/${user?.email}`);
             return res.data;
         }
     });
 
     const handleApprove = async (request) => {
-        const res = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/approve-request/${request._id}`, {
+        const res = await axiosSecure.patch(`/approve-request/${request._id}`, {
             assetId: request.assetId,
             employeeEmail: request.requesterEmail,
             hrEmail: user?.email,
             companyName: request.companyName
-        }, {
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('access-token')}`
-            }
         });
 
         if (res.data.success) {
@@ -41,9 +35,7 @@ const AllRequest = () => {
 
     const handleReject = async (id) => {
         if (window.confirm("Are you sure you want to reject this request?")) {
-            const res = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/reject-request/${id}`, {}, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const res = await axiosSecure.patch(`/reject-request/${id}`, {});
             if (res.data.modifiedCount > 0) {
                 toast.success("Request Rejected!");
                 refetch();

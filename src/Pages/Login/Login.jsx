@@ -6,6 +6,7 @@ import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import useAuth from '../../Hooks/useAuth';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const Login = () => {
 
@@ -13,6 +14,7 @@ const Login = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [authError, setAuthError] = useState("");
+    const axiosSecure = useAxiosSecure()
 
     const {
         register,
@@ -29,17 +31,12 @@ const Login = () => {
             const email = result.user.email;
 
             // Get JWT
-            const jwtRes = await axios.post("https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/jwt", { email });
+            const jwtRes = await axios.post("https://asset-manage-server-blue.vercel.app/jwt", { email });
             localStorage.setItem("access-token", jwtRes.data.token);
 
             // Get user role
-            const roleRes = await axios.get(
-                `https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/users/role/${email}`,
-                {
-                    headers: {
-                        authorization: `Bearer ${jwtRes.data.token}`,
-                    },
-                }
+            const roleRes = await axiosSecure.get(
+                `/users/role/${email}`
             );
 
             toast.success("Login successful 🚀");

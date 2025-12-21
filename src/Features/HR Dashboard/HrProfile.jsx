@@ -4,11 +4,13 @@ import useAuth from '../../Hooks/useAuth';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { uploadImage } from '../../Hooks/uploadImage';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const HrProfile = () => {
     const { user, profileRefetch, updateUserProfile } = useAuth();
     const { register, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
+    const axiosSecure = useAxiosSecure()
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -30,9 +32,7 @@ const HrProfile = () => {
                 companyLogo: logoURL
             };
 
-            const res = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/update-hr-profile/${user?.email}`, updateInfo, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const res = await axiosSecure.patch(`/update-hr-profile/${user?.email}`, updateInfo);
 
             if (res.data.modifiedCount > 0 || res.data.matchedCount > 0) {
                 toast.success("Company profile updated!");

@@ -2,16 +2,16 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useAuth from '../../Hooks/useAuth';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const EmTeam = () => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure()
 
     const { data: teamData = {}, isLoading } = useQuery({
         queryKey: ['my-team', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/my-team/${user?.email}`, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const res = await axiosSecure.get(`/my-team/${user?.email}`);
             return res.data;
         }
     });

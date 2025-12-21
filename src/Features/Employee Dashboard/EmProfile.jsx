@@ -4,8 +4,10 @@ import useAuth from '../../Hooks/useAuth';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { uploadImage } from '../../Hooks/uploadImage'; 
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const EmProfile = () => {
+    const axiosSecure = useAxiosSecure()
     const { user, profileRefetch, updateUserProfile } = useAuth();
     const { register, handleSubmit } = useForm();
     const [uploading, setUploading] = useState(false);
@@ -30,9 +32,7 @@ const EmProfile = () => {
                 photo: photoURL
             };
 
-            const dbRes = await axios.patch(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/update-profile/${user?.email}`, updateInfo, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const dbRes = await axiosSecure.patch(`/update-profile/${user?.email}`, updateInfo);
 
             if (dbRes.data.modifiedCount > 0 || dbRes.data.matchedCount > 0) {
                 toast.success("Profile updated successfully!");

@@ -3,25 +3,23 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import useAuth from '../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const MyEmployee = () => {
     const { user } = useAuth(); 
+    const axiosSecure = useAxiosSecure()
 
     const { data: employees = [], refetch } = useQuery({
         queryKey: ['my-employees', user?.email],
         queryFn: async () => {
-            const res = await axios.get(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/my-employees/${user?.email}`, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const res = await axiosSecure.get(`/my-employees/${user?.email}`);
             return res.data;
         }
     });
 
     const handleRemove = async (id) => {
         if (window.confirm("Are you sure you want to remove this employee from your company?")) {
-            const res = await axios.delete(`https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/remove-employee/${id}?hrEmail=${user?.email}`, {
-                headers: { authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            });
+            const res = await axiosSecure.delete(`/remove-employee/${id}?hrEmail=${user?.email}`);
             if (res.data.success) {
                 toast.success("Employee removed!");
                 refetch();

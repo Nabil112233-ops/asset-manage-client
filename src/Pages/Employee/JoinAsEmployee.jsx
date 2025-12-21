@@ -6,12 +6,14 @@ import useAuth from '../../Hooks/useAuth';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { uploadImage } from '../../Hooks/uploadImage';
+import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const JoinAsEmployee = () => {
     const navigate = useNavigate()
     const { createUser, updateUserProfile } = useAuth()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+    const axiosSecure = useAxiosSecure()
 
     const onSubmit = async (data) => {
         try {
@@ -32,7 +34,7 @@ const JoinAsEmployee = () => {
                 createdAt: new Date(),
             };
 
-            await axios.post("https://asset-manage-server-git-main-junayed-al-nur-nabils-projects.vercel.app/users/employee", payload);
+            await axiosSecure.post("/users/employee", payload);
 
             toast.success("Employee account created successfully 🎉");
 
