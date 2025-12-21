@@ -78,10 +78,10 @@ const AssetList = () => {
     if (isLoading) return <div className="text-center p-20"><span className="loading loading-spinner loading-lg"></span></div>;
 
     return (
-        <div className="space-y-8 p-4 md:p-6">
+        <div className="max-w-[100vw] overflow-hidden space-y-6 p-0 sm:p-2 md:p-6">
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-white p-9 rounded-2xl shadow-sm border h-[350px]">
+                <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border h-[300px] sm:h-[350px]">
                     <h3 className="text-lg font-bold mb-4">Asset Distribution (Returnable vs Non)</h3>
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
@@ -113,8 +113,8 @@ const AssetList = () => {
                     <h2 className="text-xl font-bold">Company Assets</h2>
                     <input type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} className="input input-bordered w-full max-w-xs" />
                 </div>
-                <div className="overflow-x-auto">
-                    <table className="table w-full">
+                <div className="overflow-x-auto w-full">
+                    <table className="table w-full text-sm md:text-base">
                         <thead>
                             <tr className="bg-gray-50">
                                 <th>Image</th>
@@ -133,7 +133,7 @@ const AssetList = () => {
                                     <td>{asset.productType}</td>
                                     <td className="font-bold text-teal-600">{asset.quantity}</td>
                                     <td>{new Date(asset.dateAdded).toLocaleDateString()}</td>
-                                    <td className="flex justify-center gap-2">
+                                    <td className="flex flex-wrap justify-center gap-2">
                                         <button onClick={() => { setEditingAsset(asset); reset(asset); }} className="btn btn-sm btn-info text-white">Edit</button>
                                         <button onClick={() => handleDelete(asset._id)} className="btn btn-sm btn-error text-white">Delete</button>
                                     </td>

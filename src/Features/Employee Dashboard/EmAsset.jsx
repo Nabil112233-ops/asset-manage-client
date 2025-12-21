@@ -46,9 +46,9 @@ const EmAsset = () => {
     });
 
     return (
-        <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+        <div className="p-4 sm:p-6 bg-white rounded-2xl shadow-sm border">
             {/* Header - Non-printable during normal view if needed, but we'll style it */}
-            <div className="flex justify-between items-center mb-6 no-print">
+            <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6 no-print">
                 <h2 className="text-2xl font-bold text-gray-800">My Assigned Assets</h2>
                 <button onClick={handlePrint} className="btn btn-primary btn-sm bg-teal-600 border-none">
                     🖨️ Print Report (PDF)
@@ -56,7 +56,7 @@ const EmAsset = () => {
             </div>
 
             {/* Filter Section */}
-            <div className="flex flex-col md:flex-row gap-4 mb-8 no-print">
+            <div className="flex flex-col sm:flex-row gap-3 mb-8 no-print">
                 <input
                     className="input input-bordered w-full md:w-1/2"
                     placeholder="Search by asset name..."
@@ -78,7 +78,7 @@ const EmAsset = () => {
             </div>
 
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="table w-full text-sm sm:text-base">
                     <thead className="bg-gray-50">
                         <tr>
                             <th>Asset Name</th>

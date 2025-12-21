@@ -27,18 +27,18 @@ const UpgradePackage = () => {
     };
 
     return (
-        <div className="bg-gray-50 min-h-screen p-6">
+        <div className="bg-gray-50 min-h-screen p-4 sm:p-6">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-extrabold text-gray-800 mb-4">Upgrade Your Team Capacity</h2>
                     <p className="text-gray-500">Current Limit: <span className="badge badge-secondary font-bold">{user?.packageLimit} Members</span></p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {packages.map((pkg, i) => (
                         <div 
                             key={i} 
-                            className={`relative bg-white border-2 rounded-3xl p-8 shadow-sm transition-all flex flex-col ${
+                            className={`relative bg-white border-2 rounded-3xl p-6 md:p-8 shadow-sm transition-all flex flex-col ${
                                 user?.packageLimit === pkg.members 
                                 ? 'border-teal-500 ring-2 ring-teal-100 shadow-md' 
                                 : 'border-gray-100 hover:border-teal-200 hover:shadow-lg'

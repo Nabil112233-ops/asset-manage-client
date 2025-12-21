@@ -9,7 +9,7 @@ const EmployeeDashboardLayout = () => {
             <EmployeeNavbar></EmployeeNavbar>
             <div className="flex">
                 <EmployeeSidebar></EmployeeSidebar>
-                <main className="flex-1 p-6">
+                <main className="flex-1 p-6 overflow-x-auto w-full">
                     <Outlet />
                 </main>
             </div>

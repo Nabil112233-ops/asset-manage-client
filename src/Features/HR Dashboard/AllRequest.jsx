@@ -52,9 +52,9 @@ const AllRequest = () => {
     };
 
     return (
-        <div className="bg-white rounded-xl shadow p-6 overflow-x-auto">
+        <div className="bg-white rounded-xl shadow p-4 sm:p-6 overflow-x-auto w-full">
             <h2 className="text-xl font-bold mb-4">Asset Requests</h2>
-            <table className="table w-full">
+            <table className="table w-full text-sm md:text-base">
                 <thead>
                     <tr className="bg-gray-100">
                         <th>Employee</th>
@@ -79,7 +79,7 @@ const AllRequest = () => {
                                     {req.status}
                                 </span>
                             </td>
-                            <td className="flex gap-2">
+                            <td className="flex flex-wrap gap-2">
                                 {req.status === 'pending' && (
                                     <>
                                         <button onClick={() => handleApprove(req)} className="btn btn-xs btn-success text-white">Approve</button>

@@ -30,7 +30,7 @@ const MyEmployee = () => {
     };
 
     return (
-        <div className="bg-white rounded-xl shadow p-6">
+        <div className="bg-white rounded-xl shadow p-4 sm:p-6">
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h2 className="text-xl font-bold text-gray-800">My Employees</h2>
@@ -41,7 +41,7 @@ const MyEmployee = () => {
             </div>
 
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="table w-full text-sm sm:text-base">
                     <thead>
                         <tr className="bg-gray-50">
                             <th>Photo</th>
@@ -55,7 +55,7 @@ const MyEmployee = () => {
                             <tr key={emp._id} className="hover:bg-gray-50">
                                 <td>
                                     <div className="avatar">
-                                        <div className="mask mask-squircle w-10 h-10">
+                                        <div className="mask mask-squircle w-8 h-8 sm:w-10 sm:h-10">
                                             <img src={emp.photo || "https://via.placeholder.com/40"} alt="" />
                                         </div>
                                     </div>

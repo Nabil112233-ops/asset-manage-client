@@ -9,7 +9,7 @@ const HrDashboardLayout = () => {
             <HrNavbar></HrNavbar>
             <div className='flex'>
                 <HrSidebar></HrSidebar>
-                <main className='flex-1 p-7'>
+                <main className='flex-1 p-0 mt-4 md:p-6 overflow-x-auto w-full'>
                     <Outlet></Outlet>
                 </main>
             </div>
