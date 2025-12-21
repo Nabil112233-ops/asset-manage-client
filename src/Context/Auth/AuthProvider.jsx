@@ -50,8 +50,6 @@ const AuthProvider = ({ children }) => {
         }
     });
 
-    // State ovserver
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);

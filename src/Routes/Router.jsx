@@ -18,11 +18,14 @@ import Login from "../Pages/Login/Login";
 import ManagerRoute from "./Private Route/ManagerRoute";
 import EmployeeRoute from "./Private Route/EmployeeRoute";
 import HrProfile from "../Features/HR Dashboard/HrProfile";
+import Payment from "../Pages/Payment/Payment";
+import ErrorPage from "../Pages/Error/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -45,6 +48,7 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard/hr",
     element: <ManagerRoute><HrDashboardLayout></HrDashboardLayout></ManagerRoute>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -69,12 +73,17 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: <HrProfile></HrProfile>
+      },
+      {
+        path: 'payment',
+        element: <Payment></Payment>
       }
     ]
   },
   {
     path: '/dashboard/employee',
     element: <EmployeeRoute><EmployeeDashboardLayout></EmployeeDashboardLayout></EmployeeRoute>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
