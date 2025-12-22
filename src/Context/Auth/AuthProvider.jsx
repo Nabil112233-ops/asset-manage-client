@@ -4,13 +4,14 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { auth } from '../../Firebase/firebase.init';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../Hooks/axiosSecure';
+// import useAxiosSecure from '../../Hooks/axiosSecure';
 
 const AuthProvider = ({ children }) => {
-    
+
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    // const axiosSecure = useAxiosSecure()
 
     // SignUp 
     const createUser = (email, password) => {
@@ -43,9 +44,13 @@ const AuthProvider = ({ children }) => {
 
     const { data: userData, refetch: profileRefetch, isLoading: profileLoading } = useQuery({
         queryKey: ['user-profile', user?.email],
-        enabled: !!user?.email && !loading,
+        enabled: !!user?.email && !!localStorage.getItem('access-token'),
         queryFn: async () => {
-            const res = await useAxiosSecure.get(`/user-profile/${user?.email}`);
+            const res = await axios.get(`https://asset-manage-server-blue.vercel.app/user-profile/${user?.email}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('access-token')}`
+                }
+            });
             return res.data;
         }
     });
@@ -73,7 +78,7 @@ const AuthProvider = ({ children }) => {
 
 
     const authInfo = {
-        user: userData? { ...user, ...userData } : user,
+        user: userData ? { ...user, ...userData } : user,
         loading: loading || profileLoading,
         createUser,
         logInUser,

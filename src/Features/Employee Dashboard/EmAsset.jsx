@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import useAuth from '../../Hooks/useAuth';
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../../Hooks/axiosSecure';
@@ -10,11 +9,12 @@ const EmAsset = () => {
     const { user } = useAuth();
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('All');
+    // console.log(filter)
 
     const { data: myAssets = [], refetch } = useQuery({
         queryKey: ['my-assets', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/assets/${user?.email}`);
+            const res = await axiosSecure.get(`/my-assets/${user?.email}`);
             return res.data;
         }
     });
@@ -43,6 +43,7 @@ const EmAsset = () => {
         return matchesSearch && matchesFilter;
     });
 
+    // console.log(myAssets)
     return (
         <div className="p-4 sm:p-6 bg-white rounded-2xl shadow-sm border">
             {/* Header - Non-printable during normal view if needed, but we'll style it */}
